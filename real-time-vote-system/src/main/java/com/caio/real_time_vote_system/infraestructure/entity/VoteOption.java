@@ -1,4 +1,4 @@
-package com.caio.real_time_vote_system.entity;
+package com.caio.real_time_vote_system.infraestructure.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "tb_vote_options")
 @AllArgsConstructor
 @NoArgsConstructor
-public class VoteOptions {
+public class VoteOption {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +25,7 @@ public class VoteOptions {
     private Integer votesQuantity;
 
     @OneToMany
-    @JoinColumn(name = "polls_id", referencedColumnName = "id")
-    private List<Polls> polls;
+    @JoinColumn(name = "vote-option-id", referencedColumnName = "id")
+    private List<Vote> vote;
+
 }

@@ -1,4 +1,4 @@
-package com.caio.real_time_vote_system.entity;
+package com.caio.real_time_vote_system.infraestructure.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Polls {
+public class Poll {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,5 +31,11 @@ public class Polls {
     @Column(name = "end_date")
     private LocalDate endDate;
 
+    @OneToMany
+    @JoinColumn(name = "poll_id", referencedColumnName = "id")
+    private List<VoteOption> voteOptions;
 
+    @OneToMany
+    @JoinColumn(name = "poll_id", referencedColumnName = "id")
+    private List<Vote> vote;
 }
