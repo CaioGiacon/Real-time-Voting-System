@@ -34,4 +34,4 @@ build/
 
 
 ## Properties
-real-time-vote-system/src/main/resources/application.properties
+src/main/resources/application.properties
