@@ -4,10 +4,7 @@ import com.caio.real_time_vote_system.infraestructure.entity.User;
 import com.caio.real_time_vote_system.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/votesystem")
@@ -19,5 +16,10 @@ public class UserController {
     @PostMapping("/users")
     public ResponseEntity<User> saveUser(@RequestBody User user) {
         return ResponseEntity.ok(userService.createUser(user));
+    }
+
+    @GetMapping
+    public ResponseEntity<User> findUserByEmail(@RequestParam("email") String email) {
+        return ResponseEntity.ok(userService.searchEmail(email));
     }
 }
