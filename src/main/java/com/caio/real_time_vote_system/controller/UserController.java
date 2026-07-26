@@ -18,8 +18,4 @@ public class UserController {
         return ResponseEntity.ok(userService.createUser(user));
     }
 
-    @GetMapping
-    public ResponseEntity<User> findUserByEmail(@RequestParam("email") String email) {
-        return ResponseEntity.ok(userService.searchEmail(email));
-    }
 }

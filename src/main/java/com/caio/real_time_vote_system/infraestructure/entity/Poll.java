@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,11 +23,14 @@ public class Poll {
     private Long id;
     @Column(name = "title", length = 200)
     private String title;
-    @Column(name = "question", length = 200)
-    private String question;
+    //@ElementCollection
+    //@CollectionTable(name = "question_list", joinColumns = @JoinColumn(name = "poll_id"))
+    @Column(name = "question")
+    private List<String> question;
     @Column(name = "status", length = 9)
     private String status;
-    @Column(name = "creation_date")
+    @CreationTimestamp
+    @Column(name = "creation_date", updatable = false)
     private LocalDate creationDate;
     @Column(name = "end_date")
     private LocalDate endDate;
@@ -38,4 +42,8 @@ public class Poll {
     @OneToMany
     @JoinColumn(name = "poll_id", referencedColumnName = "id")
     private List<Vote> vote;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 }
