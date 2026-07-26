@@ -21,7 +21,7 @@ public class User {
     private Long id;
     @Column(name = "name", length = 100)
     private String name;
-    @Column(name = "email", length = 100)
+    @Column(unique = true, name = "email", length = 100)
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL)
