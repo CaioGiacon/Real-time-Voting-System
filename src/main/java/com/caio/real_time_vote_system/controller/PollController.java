@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/votesystem")
 @RequiredArgsConstructor
@@ -20,6 +22,7 @@ public class PollController {
         Poll newPoll = pollService.createPoll(id, pollDTO);
 
         PollDTO pollResponseDTO = new PollDTO(
+                newPoll.getId(),
                 newPoll.getTitle(),
                 newPoll.getQuestion(),
                 newPoll.getStatus(),
@@ -29,4 +32,22 @@ public class PollController {
         );
         return ResponseEntity.status(HttpStatus.CREATED).body(pollResponseDTO);
     }
+
+    @GetMapping("/polls")
+    public ResponseEntity<List<PollDTO>> polls() {
+       List<Poll> polls = pollService.getAllPolls();
+
+       List<PollDTO> pollResponseDTO = polls.stream().map(
+               poll -> new PollDTO(
+                       poll.getId(),
+                       poll.getTitle(),
+                       poll.getQuestion(),
+                       poll.getStatus(),
+                       poll.getCreationDate(),
+                       poll.getEndDate(),
+                       poll.getUser().getId()
+               )).toList();
+
+        return ResponseEntity.ok(pollResponseDTO);
+   }
 }

@@ -23,10 +23,8 @@ public class Poll {
     private Long id;
     @Column(name = "title", length = 200)
     private String title;
-    //@ElementCollection
-    //@CollectionTable(name = "question_list", joinColumns = @JoinColumn(name = "poll_id"))
     @Column(name = "question")
-    private List<String> question;
+    private String question;
     @Column(name = "status", length = 9)
     private String status;
     @CreationTimestamp
