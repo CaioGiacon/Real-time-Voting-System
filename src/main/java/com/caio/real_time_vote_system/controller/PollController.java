@@ -20,6 +20,7 @@ public class PollController {
         Poll newPoll = pollService.createPoll(id, pollDTO);
 
         PollDTO pollResponseDTO = new PollDTO(
+                newPoll.getId(),
                 newPoll.getTitle(),
                 newPoll.getQuestion(),
                 newPoll.getStatus(),
