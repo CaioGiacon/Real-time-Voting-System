@@ -8,6 +8,8 @@ import com.caio.real_time_vote_system.infraestructure.repository.PollRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PollService {
@@ -35,5 +37,9 @@ public class PollService {
             throw new InvalidStatusException(
                     String.format("Is not possible to create a poll with %s status", status));
         }
+    }
+
+    public List<Poll> getAllPolls() {
+        return pollRepository.findAll();
     }
 }
