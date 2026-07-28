@@ -42,4 +42,9 @@ public class PollService {
     public List<Poll> getAllPolls() {
         return pollRepository.findAll();
     }
+    
+    public List<Poll> getPollById(Long id) {
+        List<Long> pollId = List.of(id);
+        return pollRepository.findAllById(pollId);
+    }
 }
