@@ -50,4 +50,22 @@ public class PollController {
 
        return ResponseEntity.ok(pollResponseDTO);
     }
+
+    @GetMapping("/polls/{pollId}")
+    public ResponseEntity<List<PollDTO>> getPollById(@PathVariable Long pollId) {
+        List<Poll> polls = pollService.getPollById(pollId);
+
+        List<PollDTO> pollResponseDTO = polls.stream().map(
+                poll -> new PollDTO(
+                        poll.getId(),
+                        poll.getTitle(),
+                        poll.getQuestion(),
+                        poll.getStatus(),
+                        poll.getCreationDate(),
+                        poll.getEndDate(),
+                        poll.getUser().getId()
+                )).toList();
+
+        return ResponseEntity.ok(pollResponseDTO);
+    }
 }
